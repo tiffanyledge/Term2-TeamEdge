@@ -1,17 +1,39 @@
-(user_id,int)
-1
-
 <!DOCTYPE html>
 <html lang="en">
+<html>
+    <head>
+        <title>Message Board</title>
+        <link rel="stylesheet" href="/static/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">           
+    </html>
 <head>
 
 </head>
 <body>
-    <h1>Message Board</h1>
-    <form action="/" method='post'>
+    <form action="/post-message" method='post'>
         <input type="text" name="message">
         <input type="Submit" value="Submit">
-
     </form>
+    <table>
+        <tr>
+            <th>Message</th>
+        </tr>
+        <div class="container">
+            {% for message in messages %}
+                <div class="post-it">
+                    <tr>
+                        <td>{{message["message"]}}</td>
+                        <td><a href="{{ '/edit/%s' %message.rowid}}">Edit</a>
+                            <a href="{{ '/delete-message/%s' %message.rowid}}">Delete</a>
+                        </td>
+                    </tr>
+                </div>
+        </div>               
+        {% endfor %}
+
+    </table>
+
 </body>
 
